@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>人力资源管理系统</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/back_manager.css"/>
+</head>
+<body>
+<!--
+    作者：第六组
+    时间：2017-10-25
+    描述：导航栏
+-->
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">人力资源管理系统</div>
+
+        <ul class="layui-nav layui-layout-right">
+            <a class="layui-nav-item" onclick="quit();" href="../login.html" style="color: forestgreen">退出</a>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item  ">
+                    <a href="javascript:;">培训管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="info">培训计划录入</a></dd>
+                        <dd><a href="javascript:;" class="info">培训信息查看</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">薪金管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="info">薪金信息录入</a></dd>
+                        <dd><a href="javascript:;" class="info">薪金信息查看</a></dd>
+                      <!--  <dd><a href="javascript:;" class="info">薪金更改</a></dd>-->
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">人员信息管理</a>
+                    <dl class="layui-nav-child">
+                        <!--<dd><a href="javascript:;" class="info">角色管理</a></dd>-->
+                        <dd><a href="javascript:;" class="info">人员信息录入</a></dd>
+                        <dd><a href="javascript:;" class="info">人员信息查看</a></dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">招聘管理模块</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="info">应聘信息录入</a></dd>
+                        <dd><a href="javascript:;" class="info">应聘信息查看</a></dd>
+                      <!--  <dd><a href="javascript:;" class="info">人才库浏览</a></dd>-->
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">奖惩管理模块</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="info">奖惩信息登记</a></dd>
+                        <dd><a href="javascript:;" class="info">奖惩信息查看</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--
+        作者：第六组
+        时间：2017-10-25
+        描述：右主体
+    -->
+    <div class="layui-body ">
+        <!--
+            作者：第六组
+            时间：2017-12-28
+            描述： 培训计划录入
+         -->
+        <div class="text" style="margin-top: 50px;">
+            <div class="embed-responsive">
+                <iframe class='embed-responsive-item' width="105%" height="100%" style="min-height: 800px;"
+                        src="../train/import.html" allowtransparency="true" allowfullscreen="true"
+                        allowfullscreenInteractive="true" border="0" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!--
+            作者：第六组
+            时间：2017-12-28
+            描述： 培训信息查看
+         -->
+        <div class="text" style="margin-top: 50px;">
+            <div class="embed-responsive">
+                <iframe class='embed-responsive-item' width="105%" height="100%" style="min-height: 800px;"
+                        src="../train/train_info.html" allowtransparency="true" allowfullscreen="true"
+                        allowfullscreenInteractive="true" border="0" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!--
+            作者：第六组
+            时间：2017-12-28
+            描述： 薪金信息录入
+         -->
+        <div class="text" style="margin-top: 50px;">
+            <div class="embed-responsive">
+                <iframe class='embed-responsive-item' width="105%" height="100%" style="min-height: 800px;"
+                        src="../salaryManage/addSalary.html" allowtransparency="true" allowfullscreen="true"
+                        allowfullscreenInteractive="true" border="0" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!--
+            作者：第六组
+            时间：2017-12-28
+            描述： 薪金信息查看
+         -->
+        <div class="text" style="margin-top: 50px;">
+            <div class="embed-responsive">
+                <iframe class='embed-responsive-item' width="105%" height="100%" style="min-height: 800px;"
+                        src="../salaryManage/showSalary.html" allowtransparency="true" allowfullscreen="true"
+                        allowfullscreenInteractive="true" border="0" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!--
+            作者：第六组
+            时间：2017-12-28
+            描述： 角色管理
+         -->
+       <!-- <div class="text" style="margin-top: 50px;">
+            <div class="embed-responsive">
+                <iframe class='embed-responsive-item' width="105%" height="100%" style="min-height: 800px;"
+                        src="" allowtransparency="true" allowfullscreen="true"
+                        allowfullscreenInteractive="true" border="0" frameborder="0"></iframe>
+            </div>
+        </div>-->
+
+        <!--
+            作者：第六组
+            时间：2017-12-28
+            描述： 人员信息录入
+         -->
+        <div class="text" style="margin-top: 50px;">
+            <div class="embed-responsive">
+                <iframe class='embed-responsive-item' width="105%" height="100%" style="min-height: 800px;"
+                        src="../user/add.html" allowtransparency="true" allowfullscreen="true"
+                        allowfullscreenInteractive="true" border="0" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!--
+            作者：第六组
+            时间：2017-12-28
+            描述： 人员信息查看
+         -->
+        <div class="text" style="margin-top: 50px;">
+            <div class="embed-responsive">
+                <iframe class='embed-responsive-item' width="105%" height="100%" style="min-height: 800px;"
+                        src="../user/userList.html" allowtransparency="true" allowfullscreen="true"
+                        allowfullscreenInteractive="true" border="0" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!--
+            作者：第六组
+            时间：2017-12-28
+            描述： 应聘信息录入
+         -->
+        <div class="text" style="margin-top: 50px;">
+            <div class="embed-responsive">
+                <iframe class='embed-responsive-item' width="105%" height="100%" style="min-height: 800px;"
+                        src="../application/addApplication.html" allowtransparency="true" allowfullscreen="true"
+                        allowfullscreenInteractive="true" border="0" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!--
+            作者：第六组
+            时间：2017-12-28
+            描述： 应聘信息查看
+         -->
+        <div class="text" style="margin-top: 50px;">
+            <div class="embed-responsive">
+                <iframe class='embed-responsive-item' width="105%" height="100%" style="min-height: 800px;"
+                        src="../application/showApplication.html" allowtransparency="true" allowfullscreen="true"
+                        allowfullscreenInteractive="true" border="0" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!--
+            作者：第六组
+            时间：2017-12-28
+            描述： 人才库浏览
+         -->
+      <!--  <div class="text" style="margin-top: 50px;">
+            <div class="embed-responsive">
+                <iframe class='embed-responsive-item' width="105%" height="100%" style="min-height: 800px;"
+                        src="" allowtransparency="true" allowfullscreen="true"
+                        allowfullscreenInteractive="true" border="0" frameborder="0"></iframe>
+            </div>
+        </div>-->
+
+        <!--
+            作者：第六组
+            时间：2017-12-28
+            描述： 奖惩信息登记
+         -->
+        <div class="text" style="margin-top: 50px;">
+            <div class="embed-responsive">
+                <iframe class='embed-responsive-item' width="105%" height="100%" style="min-height: 800px;"
+                        src="../reward/add.html" allowtransparency="true" allowfullscreen="true"
+                        allowfullscreenInteractive="true" border="0" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!--
+            作者：第六组
+            时间：2017-12-28
+            描述： 奖惩信息查看
+         -->
+        <div class="text" style="margin-top: 50px;">
+            <div class="embed-responsive">
+                <iframe class='embed-responsive-item' width="105%" height="100%" style="min-height: 800px;"
+                        src="../reward/list.html" allowtransparency="true" allowfullscreen="true"
+                        allowfullscreenInteractive="true" border="0" frameborder="0"></iframe>
+            </div>
+        </div>
+
+    </div>
+    <!--
+        作者：
+        时间：2017-10-25
+        描述：底部固定区域
+    -->
+    <div class="layui-footer">
+        人力资源管理系统
+    </div>
+</div>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../layui/layui.all.js"></script>
+<script type="text/javascript" src="../js/back_manager.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript">
+    //退出登录
+    function quit() {
+
+//        window.location.href = getRootPath() + "/";
+    }
+</script>
+</body>
+</html>

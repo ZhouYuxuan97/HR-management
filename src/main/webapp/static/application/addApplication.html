@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>展示</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <script src="../js/jquery-3.1.0.js"></script>
+    <script src="../js/jquery.form.min.js"></script>
+</head>
+<body>
+<form class="layui-form" action="#" id="addSalary" enctype="multipart/form-data">
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" required lay-verify="required|name" placeholder="请输入应聘者名称"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block">
+            <input type="text" name="sex" required lay-verify="required|sex" placeholder="请输入性别"
+                   autocomplete="off" id="category"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">年龄</label>
+        <div class="layui-input-block">
+            <input type="text" name="age" required lay-verify="required|age" placeholder="请输入年龄"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">工作</label>
+        <div class="layui-input-block">
+            <input type="text" name="job" required lay-verify="required|job" placeholder="请输入工作"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">专业</label>
+        <div class="layui-input-block">
+            <input type="text" name="major" required lay-verify="required|major" placeholder="请输入专业"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">学校</label>
+        <div class="layui-input-block">
+            <input type="text" name="school" required lay-verify="required|school" placeholder="请输入学校"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">学历</label>
+        <div class="layui-input-block">
+            <input type="text" name="studyEffort" required lay-verify="required|studyEffort" placeholder="请输入学历"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">详细经历</label>
+        <div class="layui-input-block">
+            <input type="text" name="content" required lay-verify="required|content" placeholder="请输入详细经历"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="sendFilter">立即提交</button>
+            <button type="reset" id="resetBtn" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<script src="../layui/layui.js"></script>
+<script src="../js/common.js"></script>
+<script type="text/javascript">
+    layui.use(['layer', "form"], function () {
+        var layer = layui.layer;
+        var form = layui.form;
+
+        //表单验证
+        form.verify({
+            name: function (data) {
+                var filteredData = filter(data);
+                if (data != filteredData) {
+                    return '包含敏感词汇!';
+                }
+                var length = data.length;
+                if (length < 1 || length > 10) {
+                    return '长度为1-10之间';
+                }
+            },
+            sex:function(data){
+                if(data.length<0||data.length>2){
+                    return '0-2之间';
+                }
+            },
+            age:function(data){
+                if(data<0||data>200){
+                    return '年龄在0-200之间';
+                }
+            },
+            job:function(data){
+                var filteredData = filter(data);
+                if (data != filteredData) {
+                    return '包含敏感词汇!';
+                }
+                var length = data.length;
+                if (length < 1 || length > 100) {
+                    return '长度为1-100之间';
+                }
+            },
+            major:function(data){
+                var filteredData = filter(data);
+                if (data != filteredData) {
+                    return '包含敏感词汇!';
+                }
+                var length = data.length;
+                if (length < 1 || length > 50) {
+                    return '长度为1-50之间';
+                }
+            },
+            school:function(data){
+                var filteredData = filter(data);
+                if (data != filteredData) {
+                    return '包含敏感词汇!';
+                }
+                var length = data.length;
+                if (length < 1 || length > 50) {
+                    return '长度为1-10之间';
+                }
+            },
+            studyEffort:function(data){
+                var filteredData = filter(data);
+                if (data != filteredData) {
+                    return '包含敏感词汇!';
+                }
+                var length = data.length;
+                if (length < 1 || length > 50) {
+                    return '长度为1-50之间';
+                }
+            },
+
+            content:function(data){
+                var filteredData = filter(data);
+                if (data != filteredData) {
+                    return '包含敏感词汇!';
+                }
+                var length = data.length;
+                if (length < 1 || length > 10) {
+                    return '长度为1-100之间';
+                }
+            }
+        });
+
+        //表单提交
+        form.on('submit(sendFilter)', function (data) {
+
+            layer.load(1);
+            $("#addSalary").ajaxSubmit({
+                type: 'POST',
+                url: getRootPath() + '/applicantInfo/addApplication',
+                dataType: "json", /*设置返回值类型为文本*/
+                success: function (data) {
+                    if (data.status == 0) {
+                        layer.msg('添加失败:\n' + data.message, {
+                            time: 2000,
+                            icon: 5
+                        });
+                    } else {
+                        layer.msg('添加成功，请查看!', {
+                            time: 0,
+                            icon: 6,
+                            btn: ['OK'],
+                            yes: function (index) {
+                                layer.close(index);
+                                $("#resetBtn").click();
+                            }
+                        });
+                    }
+                },
+                error: function (error) {
+                    layer.msg(error, {
+                        icon: 5,
+                        time: 0,
+                        btn: ["确定"],
+                        yes: function (index) {
+                            layer.close(index);
+                        }
+                    })
+                }
+            });
+            layer.closeAll("loading");
+            return false;
+        });
+
+    });
+
+</script>
+</body>
+</html>

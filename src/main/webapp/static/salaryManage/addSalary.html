@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>展示</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <script src="../js/jquery-3.1.0.js"></script>
+    <script src="../js/jquery.form.min.js"></script>
+
+</head>
+<body>
+<form class="layui-form" action="#" id="addSalary" enctype="multipart/form-data">
+    <div class="layui-form-item">
+        <label class="layui-form-label">员工姓名</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" required lay-verify="required|name" placeholder="请输入员工名称"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">基本工资</label>
+        <div class="layui-input-block">
+            <input type="text" name="basic" required lay-verify="required|basic" placeholder="请输入基本工资"
+                   autocomplete="off" id="category"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">饭补</label>
+        <div class="layui-input-block">
+            <input type="text" name="eat" required lay-verify="required|eat" placeholder="请输入饭补"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">住房补贴</label>
+        <div class="layui-input-block">
+            <input type="text" name="house" required lay-verify="required|house" placeholder="请输入住房补贴"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">全勤奖</label>
+        <div class="layui-input-block">
+            <input type="text" name="scot" required lay-verify="required|scot" placeholder="请输入全勤奖"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">赋税</label>
+        <div class="layui-input-block">
+            <input type="text" name="duty" required lay-verify="required|duty" placeholder="请输入赋税"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">罚款</label>
+        <div class="layui-input-block">
+            <input type="text" name="punishment" required lay-verify="required|punishment" placeholder="请输入罚款"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">总工资</label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input type="text" name="totalSalary" required lay-verify="required|totalSalary" placeholder="请输入总工资"-->
+                   <!--autocomplete="off"-->
+                   <!--class="layui-input">-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">其他</label>
+        <div class="layui-input-block">
+            <input type="text" name="other" required lay-verify="required|punishment" placeholder="请输入其他"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="sendFilter">立即提交</button>
+            <button type="reset" id="resetBtn" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<script src="../layui/layui.js"></script>
+<script src="../js/common.js"></script>
+<script type="text/javascript">
+    layui.use(['layer', "form"], function () {
+        var layer = layui.layer;
+        var form = layui.form;
+
+        //表单验证
+        form.verify({
+            name: function (data) {
+                var filteredData = filter(data);
+                if (data != filteredData) {
+                    return '包含敏感词汇!';
+                }
+                var length = data.length;
+                if (length < 1 || length > 10) {
+                    return '长度为1-10之间';
+                }
+            },
+            basic:function(data){
+                if(data<500||data>1000){
+                    return '基本工资在500-1000之间';
+                }
+            },
+            eat:function(data){
+                if(data<500||data>1000){
+                    return '饭补在500-1000之间';
+                }
+            },
+            house:function(data){
+                if(data<500||data>1000){
+                    return '房补在500-1000之间';
+                }
+            },
+            scot:function(data){
+                if(data<500||data>1000){
+                    return '全勤奖在500-1000之间';
+                }
+            },
+            duty:function(data){
+                if(data<500||data>1000){
+                    return '赋税在500-1000之间';
+                }
+            },
+            house:function(data){
+                if(data<500||data>1000){
+                    return '房补在500-1000之间';
+                }
+            },
+
+            punishment:function(data){
+                if (data<500||data>1000) {
+                    return '罚金在500-1000之间';
+                }
+            },
+//            totalSalary:function(data){
+//                if (data<1 || data>10000) {
+//                    return '总工资在1-' + '10000'+ '之间';
+//                }
+//            }
+
+            other: function (data) {
+                var filteredData = filter(data);
+                if (data != filteredData) {
+                    return '包含敏感词汇!';
+                }
+                var length = data.length;
+                if (length < 1 || length > 200) {
+                    return '长度为1-200之间';
+                }
+            }
+        });
+
+        //表单提交
+        form.on('submit(sendFilter)', function (data) {
+//            var photoObj = $("#uploadPhoto").val();
+//
+//            if (photoObj == null || photoObj == "") {
+//                layer.alert("请选择一张图片作为展品封面");
+//                return false;
+//            }
+            layer.load(1);
+            $("#addSalary").ajaxSubmit({
+                type: 'POST',
+                url: getRootPath() + '/salary/addSalary',
+                dataType: "json", /*设置返回值类型为文本*/
+                success: function (data) {
+                    if (data.status == 0) {
+                        layer.msg('添加失败:\n' + data.message, {
+                            time: 2000,
+                            icon: 5
+                        });
+                    } else {
+                        layer.msg('添加成功，请查看!', {
+                            time: 0,
+                            icon: 6,
+                            btn: ['OK'],
+                            yes: function (index) {
+                                layer.close(index);
+                                $("#resetBtn").click();
+                            }
+                        });
+                    }
+                },
+                error: function (error) {
+                    layer.msg(error, {
+                        icon: 5,
+                        time: 0,
+                        btn: ["确定"],
+                        yes: function (index) {
+                            layer.close(index);
+                        }
+                    })
+                }
+            });
+            layer.closeAll("loading");
+            return false;
+        });
+
+    });
+
+</script>
+</body>
+</html>

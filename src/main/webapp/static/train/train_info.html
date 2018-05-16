@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css"/>
+    <script src="../js/jquery-3.1.0.js"></script>
+    <title>培训信息查看</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<!--显示商品列表-->
+<table class="layui-table" id="displayTable" lay-filter="tableFilter">
+</table>
+
+<script src="../js/common.js"></script>
+<script src="../layui/layui.all.js"></script>
+<script type="text/html" id="educate">
+    {{#  if(d.educate == '1'){ }}
+    <i class="layui-icon" style="color: #1E9FFF;">&#xe6af;已完成</i>
+    {{#  } }}
+    {{#  if(d.educate == '0'){ }}
+    <a class="layui-btn layui-btn-warm" lay-event="release">完成</a>
+    {{#  } }}
+</script>
+
+<script type="text/html" id="trainer">
+    <a href="javascript:void(0);" class="layui-btn layui-btn-normal" lay-event="trainer">查看</a>
+</script>
+<script type="text/html" id="delete">
+    <a href="javascript:void(0);" class="layui-btn layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/javascript">
+    layui.use(['layer', 'table', 'element'], function () {
+        var layer = layui.layer;
+        var table = layui.table;
+        var elememt = layui.element;
+//        $ = layer.$;
+
+        table.render({
+            elem: '#displayTable' //指定原始表格元素选择器
+            , url: getRootPath() + '/hr/train/get'
+            , height: 'full-20'
+//            , skin: 'nob' //行边框风格
+//            , even: true, //开启隔行背景
+            , cols: [[//id,exhibitsName,category,mainPhotoPath,intro,creatTime,shipmentAmount
+                {field: 'id', title: 'ID', width: 40, sort: true},
+                {field: 'name', title: '培训名称', width: 100},
+                {field: 'prupose', title: '培训目的', width: 50},
+                {field: 'beginTime', title: '开始时间', width: 200},
+                {field: 'endTime', title: '结束时间', width: 200},
+                {field: 'datum', title: '培训材料', width: 100},
+                {field: 'teacher', title: '培训教师', width: 100},
+                {field: 'student', title: '培训学生', width: 100},
+                {field: 'createTime', title: '创建时间', width: 200},//发布
+                {field: 'effect', title: '培训效果', width: 200},//审核状态
+                {field: 'summarize', title: '培训总结', width: 200},//发布状态
+                {field: 'educate', title: '是否完成', width: 120, templet: '#educate'}//删除
+                ,{field: 'trainer', title: '查看学员', width: 120,templet: '#trainer'}//查看学员
+                ,{field: 'delete', title: '删除培训', width: 120,templet: '#delete'}
+            ]],
+            page: true,
+            request: {
+                pageName: 'page' //页码的参数名称，默认：page
+                , limitName: 'size' //每页数据量的参数名，默认：limit
+            },
+            limit: 30,//每页默认显示数量
+            limits: [20, 30, 40]
+        });
+
+        table.on('tool(tableFilter)', function(obj){
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+            var id = data.id;
+            console.log(id);
+            if (layEvent==='release') {
+                parent.layer.open({
+                    type: 2,//层
+                    title: '完成培训',
+                    content: '../train/conplete.html?id=' + id,
+                    skin: 'layui-layer-molv',
+                    area: ['500px', '600px'],
+                    end: function () {
+                        location.reload();
+                    }
+                });
+            }
+            if (layEvent==='delete') {
+                layer.confirm("确定要删除吗", {icon: 3, title:'提示'}, function(index){
+                    $.ajax({
+                        url: getRootPath() + '/hr/train/delete'
+                        , data: {id: id}
+                        , error: function (req) {
+                            console.log(req);
+                            layer.alert("请检查网络连接");
+                        }
+                        , success:function (data) {
+                            if (data.status==0) {
+                                layer.msg(data.message, {icon: 6,time:2000});
+                                obj.del();
+                            } else {
+                                layer.msg(data.message, {icon: 5,time:2000});
+                            }
+                        }
+                    });
+                })
+            }
+            if (layEvent==='trainer') {
+                layer.open({
+                    type: 2,//层
+                    title: '查看学员信息',
+                    content: 'trainerInfo.html?id=' + id,
+                    skin: 'layui-layer-molv',
+                    area: ['500px', '600px'],
+                    end: function () {
+                        location.reload();
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
